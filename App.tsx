@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { UIState } from './types';
-import Layout from '../greychair-restaurant/components/Layout';
-import MenuAssistant from '../greychair-restaurant/components/MenuAssistant';
+import Layout from './components/Layout';
+import MenuAssistant from './components/MenuAssistant';
 import { MENU_ITEMS, CATEGORIES, RESTAURANT_INFO } from './constants';
 import type { MenuItemImage } from './types';
 
