@@ -1,0 +1,7 @@
+{
+  "name": "Grey Chair Family Kitchen",
+  "description": "A mobile-first, trust-focused website for a family-owned restaurant near Cincinnati, featuring an AI menu assistant and simple ordering flow.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
