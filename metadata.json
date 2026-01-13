@@ -1,7 +1,8 @@
+
 {
-  "name": "Grey Chair Family Kitchen",
-  "description": "A mobile-first, trust-focused website for a family-owned restaurant near Cincinnati, featuring an AI menu assistant and simple ordering flow.",
+  "name": "Grey Chair Restaurant",
+  "description": "A focused wood-fired Mediterranean kitchen in Over-the-Rhine, Cincinnati. Specializing in authentic kebabs and seasonal meze.",
   "requestFramePermissions": [
-    "microphone"
+    "geolocation"
   ]
 }

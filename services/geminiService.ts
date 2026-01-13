@@ -1,49 +1,49 @@
 
 import { GoogleGenAI } from "@google/genai";
-import { MENU_ITEMS } from "../constants";
+import { MENU, ADDRESS, HOURS, PHONE } from "../constants";
 
-export const askKitchenAssistant = async (query: string) => {
-  const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : undefined;
-  
-  if (!apiKey) {
-    console.error("API Key not found in process.env");
-    return "I'm offline for a moment, but our staff would love to help if you give us a call at (513) 555-0123!";
-  }
+const apiKey = process.env.API_KEY;
+
+const systemInstruction = `
+You are the digital concierge for Grey Chair, a wood-fired Mediterranean kitchen in Over-the-Rhine (OTR), Cincinnati.
+Tone: Warm, plainspoken, confident, neighborhood-focused. 
+
+CONTEXT:
+- Name: Grey Chair
+- Neighborhood: Over-the-Rhine / OTR
+- Address: ${ADDRESS}
+- Phone: ${PHONE}
+- Hours: ${HOURS.map(h => `${h.day}: ${h.hours}`).join(', ')}
+- Menu Highlights: ${MENU.map(m => `${m.name} ($${m.price}): ${m.description}`).join('; ')}
+- Parking: Nearby surface lots and street parking throughout OTR. Washington Park garage is a 5-minute walk.
+- Atmosphere: Urban, warm, centered around a wood-fired grill.
+- Reservations: Recommended.
+
+INSTRUCTIONS:
+- Answer guest questions about the menu, location, parking, and dietary options.
+- If someone asks for a reservation, explain they can use the form on the website or call.
+- Be concise. Use short sentences.
+- Stay focused on Grey Chair and the OTR neighborhood.
+`;
+
+export const askConcierge = async (prompt: string): Promise<string> => {
+  if (!apiKey) return "Our assistant is currently offline. Please call us for assistance.";
 
   const ai = new GoogleGenAI({ apiKey });
-  
-  const menuContext = MENU_ITEMS.map(item => 
-    `${item.name} ($${item.price}): ${item.description}`
-  ).join('\n');
-
-  const systemInstruction = `
-    You are the "Kitchen Assistant" for Grey Chair Family Kitchen, a cozy, family-owned restaurant in a small town near Cincinnati.
-    The restaurant is named after the owner's Grandpa's favorite grey chair where family stories were told.
-    
-    Our Menu:
-    ${menuContext}
-    
-    Instructions:
-    - Be warm, helpful, and small-town friendly.
-    - If someone asks for a recommendation, mention "Grandpa's Signature Meatloaf" if it fits.
-    - If someone has dietary restrictions, look at our ingredients and suggest the best fit.
-    - Keep responses concise (under 3 sentences).
-    - If you don't know something about the menu, offer to help them call the restaurant directly at (513) 555-0123.
-  `;
-
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: query,
+      contents: prompt,
       config: {
-        systemInstruction: systemInstruction,
+        systemInstruction,
         temperature: 0.7,
+        maxOutputTokens: 250,
       },
     });
 
-    return response.text || "I'm sorry, I'm having a little trouble hearing you. Can you try again?";
+    return response.text || "I'm sorry, I couldn't process that request.";
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "I'm offline for a moment, but our staff would love to help if you give us a call!";
+    return "I'm having trouble connecting right now. Feel free to call us at " + PHONE;
   }
 };

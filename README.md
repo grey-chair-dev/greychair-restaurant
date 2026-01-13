@@ -1,49 +1,28 @@
+## Grey Chair Restaurant (Vite + React)
 
+This repo contains everything you need to run the site locally.
 
-## Grey Chair Family Kitchen
+View the original AI Studio app: https://ai.studio/apps/drive/1SK1bdPQd6HuGy0Ei74ZSCKxA2BUrZzzq
 
-A cozy, family-run restaurant site (Milford, Ohio vibes) built with **React + Vite**. Includes:
+### Run locally
 
-- **Menu** browsing with dietary filters
-- **In-session cart** (add/remove, clear)
-- **Checkout (pickup)** with customer details + “Place Order” confirmation (front-end only)
-- **Kitchen Assistant** chat powered by Gemini (optional)
-- **Menu photos** currently display **“Photo coming soon”** placeholders
+**Prerequisites:** Node.js (recommended: Node 18+)
 
-## Run locally
-
-**Prerequisites:** Node.js
 
 1. Install dependencies:
-
-```bash
-npm install
-```
-
-2. (Optional) Enable the Kitchen Assistant:
-
-Create `.env.local` and set:
-
-```bash
-GEMINI_API_KEY=your_key_here
-```
-
+   `npm install`
+2. Add your Gemini API key (optional, enables the Concierge chatbot):
+   - Create `.env.local` in this folder
+   - Add:
+     `GEMINI_API_KEY=your_api_key_here`
 3. Start the dev server:
+   `npm run dev`
+4. Open:
+   `http://localhost:3000`
 
-```bash
-npm run dev
-```
+### Build / preview
 
-Vite will print the local URL in the terminal. (The configured default port is `3000`, but Vite may pick another if it’s already in use.)
-
-## Build / preview
-
-```bash
-npm run build
-npm run preview
-```
-
-## Notes
-
-- **Checkout is a demo**: there’s no payment processing and no backend order submission yet.
-- The Gemini API key is injected via Vite config so the assistant can read it from `process.env`.
+- Production build:
+  `npm run build`
+- Preview the production build:
+  `npm run preview`

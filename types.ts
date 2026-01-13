@@ -3,29 +3,21 @@ export interface MenuItem {
   id: string;
   name: string;
   description: string;
-  price: number;
-  category: string;
-  image?: MenuItemImage;
-  isGrandpaChoice?: boolean;
-  isVegetarian?: boolean;
-  isGlutenFree?: boolean;
+  price: string;
+  category: 'Meze' | 'Grill' | 'Sides' | 'Dessert';
+  dietary?: string[];
 }
 
-export interface MenuItemImage {
-  /**
-   * Prefer local photography shipped with the app (Vite `public/`).
-   * Example: "/images/menu/grandpas-meatloaf.jpg"
-   */
-  localSrc: string;
-  /**
-   * Optional web fallback so the UI still looks good before local photos are added.
-   */
-  fallbackSrc?: string;
+export interface BusinessHours {
+  day: string;
+  hours: string;
 }
 
-export interface Category {
-  id: string;
-  label: string;
+export interface ReservationData {
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  time: string;
+  guests: number;
 }
-
-export type UIState = 'home' | 'menu' | 'story' | 'location' | 'checkout';
