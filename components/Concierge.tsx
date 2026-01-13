@@ -33,7 +33,7 @@ const Concierge: React.FC = () => {
         <div className="bg-white shadow-2xl rounded-lg w-80 md:w-96 border border-[#EEE] overflow-hidden flex flex-col max-h-[500px]">
           <div className="bg-[#8E443D] p-4 text-white flex justify-between items-center">
             <div>
-              <h4 className="font-bold text-lg">Zeytin Concierge</h4>
+              <h4 className="font-bold text-lg">Grey Chair Concierge</h4>
               <p className="text-xs opacity-80">Ask about our menu or location</p>
             </div>
             <button onClick={() => setIsOpen(false)} className="text-white hover:opacity-70 text-2xl">×</button>
